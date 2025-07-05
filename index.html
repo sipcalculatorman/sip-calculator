@@ -1,109 +1,138 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>POOJA FINANCIAL SOLUTIONS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finance Calculators</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
       margin: 0;
-      background-color: #f9f9f9;
+      padding: 0;
+      text-align: center;
     }
-    header {
+    .header {
       background-color: #007bff;
       color: white;
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 1.4rem;
+      padding: 20px;
+      font-size: 24px;
       font-weight: bold;
     }
     .calculator {
       background: white;
-      max-width: 400px;
       margin: 20px auto;
       padding: 20px;
+      max-width: 400px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    h2 {
-      text-align: center;
-    }
     input {
-      width: 100%;
+      width: 90%;
       padding: 10px;
       margin: 10px 0;
-      border-radius: 5px;
       border: 1px solid #ccc;
+      border-radius: 5px;
     }
     button {
-      width: 100%;
-      padding: 10px;
-      background: #007bff;
+      background-color: #007bff;
       color: white;
+      padding: 10px 20px;
       border: none;
+      margin-top: 10px;
       border-radius: 5px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 15px;
+      color: green;
+      font-size: 1.3rem;
       font-weight: bold;
     }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
+    .footer {
+      background-color: #ffffff;
+      color: #000;
       padding: 20px;
-      background: #f1f1f1;
+      font-size: 14px;
+      margin-top: 30px;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
-  <header>POOJA FINANCIAL SOLUTIONS</header>  <div class="calculator">
+
+  <div class="header">POOJA FINANCIAL SOLUTIONS</div>
+
+  <!-- SIP Calculator -->
+  <div class="calculator">
     <h2>SIP Calculator</h2>
-    <input type="number" placeholder="Monthly Investment" id="sipAmount">
-    <input type="number" placeholder="Interest Rate (% per year)" id="sipRate">
-    <input type="number" placeholder="Years" id="sipYears">
+    <input type="number" id="sipMonthly" placeholder="Monthly Investment">
+    <input type="number" id="sipRate" placeholder="Interest Rate (% per year)">
+    <input type="number" id="sipYears" placeholder="Years">
     <button onclick="calculateSIP()">Calculate</button>
-    <p id="sipResult"></p>
-  </div>  <div class="calculator">
+    <p id="sipResult" class="result"></p>
+  </div>
+
+  <!-- FD Calculator -->
+  <div class="calculator">
     <h2>FD Calculator</h2>
-    <input type="number" placeholder="Principal Amount" id="fdPrincipal">
-    <input type="number" placeholder="Interest Rate (% per year)" id="fdRate">
-    <input type="number" placeholder="Years" id="fdYears">
+    <input type="number" id="fdPrincipal" placeholder="Principal Amount">
+    <input type="number" id="fdRate" placeholder="Interest Rate (% per year)">
+    <input type="number" id="fdYears" placeholder="Years">
     <button onclick="calculateFD()">Calculate</button>
-    <p id="fdResult"></p>
-  </div>  <div class="calculator">
+    <p id="fdResult" class="result"></p>
+  </div>
+
+  <!-- EMI Calculator -->
+  <div class="calculator">
     <h2>EMI Calculator</h2>
-    <input type="number" placeholder="Loan Amount" id="emiAmount">
-    <input type="number" placeholder="Annual Interest Rate (%)" id="emiRate">
-    <input type="number" placeholder="Loan Term (Years)" id="emiYears">
+    <input type="number" id="emiLoan" placeholder="Loan Amount">
+    <input type="number" id="emiRate" placeholder="Annual Interest Rate (%)">
+    <input type="number" id="emiYears" placeholder="Loan Term (Years)">
     <button onclick="calculateEMI()">Calculate</button>
-    <p id="emiResult"></p>
-  </div>  <footer>
-    Ratnakar Verma - Financial Consultant<br>
-    Mobile: +91 94159 10968, +91 79055 30441<br>
-    Email: ratnakarverma1969@gmail.com<br>
-    H. No. 17, Avadh Vihar Colony,<br>
-    Near Malhor Railway Crossing, Nizampur Malhor,<br>
+    <p id="emiResult" class="result"></p>
+  </div>
+
+  <!-- Contact Details Footer -->
+  <div class="footer">
+    Ratnakar Verma - Financial Consultant <br/>
+    Mobile: +91 94159 10968, +91 79055 30441 <br/>
+    Email: ratnakarverma1969@gmail.com <br/>
+    H. No. 17, Avadh Vihar Colony, <br/>
+    Near Malhor Railway Crossing, Nizampur Malhor, <br/>
     Gomtinagar, Lucknow - 226010, Uttar Pradesh
-  </footer>  <script>
+  </div>
+
+  <script>
     function calculateSIP() {
-      const P = parseFloat(document.getElementById('sipAmount').value);
-      const r = parseFloat(document.getElementById('sipRate').value) / 12 / 100;
-      const n = parseFloat(document.getElementById('sipYears').value) * 12;
-      const FV = P * (((Math.pow(1 + r, n)) - 1) * (1 + r)) / r;
-      document.getElementById('sipResult').innerText = 'Maturity Amount: ₹' + FV.toFixed(2);
+      const monthly = parseFloat(document.getElementById("sipMonthly").value);
+      const rate = parseFloat(document.getElementById("sipRate").value) / 100 / 12;
+      const years = parseFloat(document.getElementById("sipYears").value);
+      const months = years * 12;
+
+      const maturity = monthly * ((Math.pow(1 + rate, months) - 1) / rate) * (1 + rate);
+      document.getElementById("sipResult").innerHTML = `Maturity Amount: ₹${maturity.toFixed(2)}`;
     }
 
     function calculateFD() {
-      const P = parseFloat(document.getElementById('fdPrincipal').value);
-      const r = parseFloat(document.getElementById('fdRate').value) / 100;
-      const t = parseFloat(document.getElementById('fdYears').value);
-      const A = P * Math.pow(1 + r, t);
-      document.getElementById('fdResult').innerText = 'Maturity Amount: ₹' + A.toFixed(2);
+      const principal = parseFloat(document.getElementById("fdPrincipal").value);
+      const rate = parseFloat(document.getElementById("fdRate").value) / 100;
+      const years = parseFloat(document.getElementById("fdYears").value);
+
+      const maturity = principal * Math.pow((1 + rate / 1), 1 * years);
+      document.getElementById("fdResult").innerHTML = `Maturity Amount: ₹${maturity.toFixed(2)}`;
     }
 
     function calculateEMI() {
-      const P = parseFloat(document.getElementById('emiAmount').value);
-      const r = parseFloat(document.getElementById('emiRate').value) / 12 / 100;
-      const n = parseFloat(document.getElementById('emiYears').value) * 12;
-      const EMI = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-      document.getElementById('emiResult').innerText = 'Monthly EMI: ₹' + EMI.toFixed(2);
+      const loan = parseFloat(document.getElementById("emiLoan").value);
+      const rate = parseFloat(document.getElementById("emiRate").value) / 100 / 12;
+      const years = parseFloat(document.getElementById("emiYears").value);
+      const months = years * 12;
+
+      const emi = loan * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
+      document.getElementById("emiResult").innerHTML = `Monthly EMI: ₹${emi.toFixed(2)}`;
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
