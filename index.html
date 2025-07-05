@@ -1,137 +1,150 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>POOJA FINANCIAL SOLUTIONS</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
     }
-    header {
+    .header {
       background-color: #007bff;
       color: white;
-      padding: 15px;
       text-align: center;
+      padding: 15px 0;
       font-size: 22px;
       font-weight: bold;
     }
-    .tradingview-widget-container {
-      margin: 10px auto;
-      max-width: 100%;
-    }
-    .card {
+    .calculator {
+      max-width: 400px;
+      margin: 30px auto;
       background: white;
       padding: 20px;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     input {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
+      margin-bottom: 10px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 4px;
     }
     button {
       width: 100%;
       padding: 10px;
-      background: #007bff;
+      background-color: #007bff;
       color: white;
       border: none;
-      border-radius: 5px;
-      font-weight: bold;
+      border-radius: 4px;
       cursor: pointer;
     }
+    button:hover {
+      background-color: #0056b3;
+    }
     .result {
-      margin-top: 15px;
-      text-align: center;
+      font-size: 18px;
       color: green;
-      font-size: 20px;
       font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
     }
     .footer {
-      padding: 20px;
       text-align: center;
+      padding: 20px;
       font-size: 14px;
-      background-color: #f1f1f1;
+      background-color: #eee;
+    }
+    .ticker-container {
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 10px;
     }
   </style>
 </head>
-<body>  <header>POOJA FINANCIAL SOLUTIONS</header>  <!-- Live Ticker -->  <div class="tradingview-widget-container">
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {
-      "symbols": [
-        { "proName": "BSE:SENSEX", "title": "Sensex" },
-        { "proName": "NSE:NIFTY", "title": "Nifty 50" }
-      ],
-      "showSymbolLogo": true,
-      "colorTheme": "light",
-      "isTransparent": false,
-      "displayMode": "adaptive",
-      "locale": "en"
-    }
-    </script>
-  </div>  <!-- SIP Calculator -->  <div class="card">
-    <h2>SIP Calculator</h2>
-    <input id="sip-amount" type="number" placeholder="Monthly Investment" />
-    <input id="sip-rate" type="number" placeholder="Interest Rate (% per year)" />
-    <input id="sip-years" type="number" placeholder="Years" />
-    <button onclick="calculateSIP()">Calculate</button>
-    <div id="sip-result" class="result"></div>
-  </div>  <!-- FD Calculator -->  <div class="card">
-    <h2>FD Calculator</h2>
-    <input id="fd-principal" type="number" placeholder="Principal Amount" />
-    <input id="fd-rate" type="number" placeholder="Interest Rate (% per year)" />
-    <input id="fd-years" type="number" placeholder="Years" />
-    <button onclick="calculateFD()">Calculate</button>
-    <div id="fd-result" class="result"></div>
-  </div>  <!-- EMI Calculator -->  <div class="card">
-    <h2>EMI Calculator</h2>
-    <input id="emi-loan" type="number" placeholder="Loan Amount" />
-    <input id="emi-rate" type="number" placeholder="Annual Interest Rate (%)" />
-    <input id="emi-years" type="number" placeholder="Loan Term (Years)" />
-    <button onclick="calculateEMI()">Calculate</button>
-    <div id="emi-result" class="result"></div>
-  </div>  <div class="footer">
-    Ratnakar Verma - Financial Consultant<br/>
-    Mobile: +91 94159 10968, +91 79055 30441<br/>
-    Email: ratnakarverma1969@gmail.com<br/>
-    H. No. 17, Avadh Vihar Colony,<br/>
-    Near Malhor Railway Crossing, Nizampur Malhor,<br/>
-    Gomtinagar, Lucknow - 226010, Uttar Pradesh
-  </div>  <script>
-    function calculateSIP() {
-      const p = parseFloat(document.getElementById('sip-amount').value);
-      const r = parseFloat(document.getElementById('sip-rate').value) / 12 / 100;
-      const n = parseFloat(document.getElementById('sip-years').value) * 12;
-      const maturity = p * ((Math.pow(1 + r, n) - 1) * (1 + r) / r);
-      document.getElementById('sip-result').textContent = "Maturity Amount: ₹ " + maturity.toFixed(2);
-    }
+<body>
 
-    function calculateFD() {
-      const p = parseFloat(document.getElementById('fd-principal').value);
-      const r = parseFloat(document.getElementById('fd-rate').value) / 100;
-      const n = parseFloat(document.getElementById('fd-years').value);
-      const maturity = p * Math.pow(1 + r, n);
-      document.getElementById('fd-result').textContent = "Maturity Amount: ₹ " + maturity.toFixed(2);
-    }
+<div class="header">POOJA FINANCIAL SOLUTIONS</div>
 
-    function calculateEMI() {
-      const loan = parseFloat(document.getElementById('emi-loan').value);
-      const annualRate = parseFloat(document.getElementById('emi-rate').value) / 12 / 100;
-      const months = parseFloat(document.getElementById('emi-years').value) * 12;
-      const emi = loan * annualRate * Math.pow(1 + annualRate, months) / (Math.pow(1 + annualRate, months) - 1);
-      document.getElementById('emi-result').textContent = "Monthly EMI: ₹ " + emi.toFixed(2);
-    }
-  </script></body>
+<div class="ticker-container">
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+  {
+    "symbols": [
+      { "proName": "BSE:SENSEX", "title": "Sensex" },
+      { "proName": "NSE:NIFTY", "title": "NIFTY 50" }
+    ],
+    "colorTheme": "light",
+    "isTransparent": false,
+    "displayMode": "regular",
+    "locale": "en"
+  }
+  </script>
+</div>
+
+<div class="calculator">
+  <h2>SIP Calculator</h2>
+  <input type="number" id="sipAmount" placeholder="Monthly Investment" />
+  <input type="number" id="sipRate" placeholder="Interest Rate (% per year)" />
+  <input type="number" id="sipYears" placeholder="Years" />
+  <button onclick="calculateSIP()">Calculate</button>
+  <div id="sipResult" class="result"></div>
+</div>
+
+<div class="calculator">
+  <h2>FD Calculator</h2>
+  <input type="number" id="fdAmount" placeholder="Principal Amount" />
+  <input type="number" id="fdRate" placeholder="Interest Rate (% per year)" />
+  <input type="number" id="fdYears" placeholder="Years" />
+  <button onclick="calculateFD()">Calculate</button>
+  <div id="fdResult" class="result"></div>
+</div>
+
+<div class="calculator">
+  <h2>EMI Calculator</h2>
+  <input type="number" id="loanAmount" placeholder="Loan Amount" />
+  <input type="number" id="loanRate" placeholder="Annual Interest Rate (%)" />
+  <input type="number" id="loanTerm" placeholder="Loan Term (Years)" />
+  <button onclick="calculateEMI()">Calculate</button>
+  <div id="emiResult" class="result"></div>
+</div>
+
+<div class="footer">
+  Ratnakar Verma - Financial Consultant<br>
+  Mobile: +91 94159 10968, +91 79055 30441<br>
+  Email: ratnakarverma1969@gmail.com<br>
+  H. No. 17, Avadh Vihar Colony, Near Malhor Railway Crossing, Nizampur Malhor,<br>
+  Gomtinagar, Lucknow - 226010, Uttar Pradesh
+</div>
+
+<script>
+function calculateSIP() {
+  let p = parseFloat(document.getElementById('sipAmount').value);
+  let r = parseFloat(document.getElementById('sipRate').value) / 100 / 12;
+  let n = parseFloat(document.getElementById('sipYears').value) * 12;
+  let maturity = p * ((Math.pow(1 + r, n) - 1) * (1 + r)) / r;
+  document.getElementById('sipResult').innerText = 'Maturity Amount: ₹' + maturity.toFixed(2);
+}
+
+function calculateFD() {
+  let p = parseFloat(document.getElementById('fdAmount').value);
+  let r = parseFloat(document.getElementById('fdRate').value) / 100;
+  let t = parseFloat(document.getElementById('fdYears').value);
+  let maturity = p * Math.pow(1 + r, t);
+  document.getElementById('fdResult').innerText = 'Maturity Amount: ₹' + maturity.toFixed(2);
+}
+
+function calculateEMI() {
+  let p = parseFloat(document.getElementById('loanAmount').value);
+  let r = parseFloat(document.getElementById('loanRate').value) / 12 / 100;
+  let n = parseFloat(document.getElementById('loanTerm').value) * 12;
+  let emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+  document.getElementById('emiResult').innerText = 'Monthly EMI: ₹' + emi.toFixed(2);
+}
+</script>
+
+</body>
 </html>
