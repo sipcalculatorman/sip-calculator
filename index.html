@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SIP Calculator</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input { margin: 5px; padding: 8px; width: 200px; }
+  </style>
+</head>
+<body>
+  <h1>SIP Calculator</h1>
+  Monthly Investment: <input id="amount" type="number"><br>
+  Interest Rate (% per year): <input id="rate" type="number"><br>
+  Years: <input id="years" type="number"><br>
+  <button onclick="calculate()">Calculate</button>
+  <h2 id="result"></h2>
+
+  <script>
+    function calculate() {
+      let P = parseFloat(document.getElementById("amount").value);
+      let r = parseFloat(document.getElementById("rate").value) / 100 / 12;
+      let n = parseFloat(document.getElementById("years").value) * 12;
+      let FV = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
+      document.getElementById("result").innerText = "Future Value: ₹" + FV.toFixed(2);
+    }
+  </script>
+</body>
+</html>
