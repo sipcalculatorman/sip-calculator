@@ -6,209 +6,175 @@
   <title>POOJA FINANCIAL SOLUTIONS</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
       margin: 0;
-      padding: 0;
-      text-align: center;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
     }
-    .header {
+    header {
       background-color: #007bff;
       color: white;
-      padding: 20px;
-      font-size: 24px;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
       font-weight: bold;
     }
-    .chart-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
-    .chart-box {
-      flex: 1;
-      min-width: 350px;
-      max-width: 500px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    .ticker {
+      margin-top: 10px;
       padding: 10px;
     }
-    .market-heading {
-      font-size: 18px;
-      margin-bottom: 10px;
-      font-weight: bold;
+    .slider-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
-    .calculator {
-      background: white;
-      margin: 20px auto;
+    .slide {
+      scroll-snap-align: start;
+      flex: 0 0 100%;
+      max-width: 100%;
       padding: 20px;
-      max-width: 400px;
+      box-sizing: border-box;
+    }
+    .card {
+      background: white;
+      padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
     }
     input {
-      width: 90%;
+      width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      margin: 8px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
     }
     button {
-      background-color: #007bff;
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
       color: white;
-      padding: 10px 20px;
       border: none;
-      margin-top: 10px;
       border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
     }
     .result {
       margin-top: 15px;
+      text-align: center;
       color: green;
-      font-size: 1.3rem;
+      font-size: 20px;
       font-weight: bold;
     }
     .footer {
-      background-color: #ffffff;
-      color: #000;
       padding: 20px;
+      text-align: center;
       font-size: 14px;
-      margin-top: 30px;
-      line-height: 1.6;
+      background-color: #f1f1f1;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <div class="header">POOJA FINANCIAL SOLUTIONS</div>
+  <header>POOJA FINANCIAL SOLUTIONS</header>
 
-  <!-- Charts Section -->
-  <div class="chart-container">
+  <!-- TradingView Ticker -->
+  <div class="ticker">
+    <div class="tradingview-widget-container">
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          { "proName": "BSE:SENSEX", "title": "Sensex" },
+          { "proName": "NSE:NIFTY", "title": "Nifty 50" }
+        ],
+        "showSymbolLogo": true,
+        "colorTheme": "light",
+        "isTransparent": false,
+        "displayMode": "adaptive",
+        "locale": "en"
+      }
+      </script>
+    </div>
+  </div>
 
-    <!-- Sensex Chart -->
-    <div class="chart-box">
-      <div class="market-heading">📈 BSE SENSEX - Live Chart</div>
-      <div class="tradingview-widget-container">
-        <div id="tradingview_sensex_chart"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-        {
-          "symbol": "BSE:SENSEX",
-          "theme": "light",
-          "style": "1",
-          "locale": "en",
-          "timezone": "Asia/Kolkata",
-          "width": "100%",
-          "height": "400",
-          "allow_symbol_change": false,
-          "hide_legend": false,
-          "save_image": false,
-          "studies": [],
-          "calendar": false,
-          "support_host": "https://www.tradingview.com"
-        }
-        </script>
+  <!-- Slide Calculators -->
+  <div class="slider-container">
+    
+    <!-- SIP -->
+    <div class="slide">
+      <div class="card">
+        <h2>SIP Calculator</h2>
+        <input id="sip-amount" type="number" placeholder="Monthly Investment" />
+        <input id="sip-rate" type="number" placeholder="Interest Rate (% per year)" />
+        <input id="sip-years" type="number" placeholder="Years" />
+        <button onclick="calculateSIP()">Calculate</button>
+        <div id="sip-result" class="result"></div>
       </div>
     </div>
 
-    <!-- Nifty 50 Chart -->
-    <div class="chart-box">
-      <div class="market-heading">📊 NIFTY 50 - Live Chart</div>
-      <div class="tradingview-widget-container">
-        <div id="tradingview_nifty_chart"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-        {
-          "symbol": "CAPITALCOM:INDIA50",
-          "theme": "light",
-          "style": "1",
-          "locale": "en",
-          "timezone": "Asia/Kolkata",
-          "width": "100%",
-          "height": "400",
-          "allow_symbol_change": false,
-          "hide_legend": false,
-          "save_image": false,
-          "studies": [],
-          "calendar": false,
-          "support_host": "https://www.tradingview.com"
-        }
-        </script>
+    <!-- FD -->
+    <div class="slide">
+      <div class="card">
+        <h2>FD Calculator</h2>
+        <input id="fd-principal" type="number" placeholder="Principal Amount" />
+        <input id="fd-rate" type="number" placeholder="Interest Rate (% per year)" />
+        <input id="fd-years" type="number" placeholder="Years" />
+        <button onclick="calculateFD()">Calculate</button>
+        <div id="fd-result" class="result"></div>
+      </div>
+    </div>
+
+    <!-- EMI -->
+    <div class="slide">
+      <div class="card">
+        <h2>EMI Calculator</h2>
+        <input id="emi-loan" type="number" placeholder="Loan Amount" />
+        <input id="emi-rate" type="number" placeholder="Annual Interest Rate (%)" />
+        <input id="emi-years" type="number" placeholder="Loan Term (Years)" />
+        <button onclick="calculateEMI()">Calculate</button>
+        <div id="emi-result" class="result"></div>
       </div>
     </div>
 
   </div>
 
-  <!-- SIP Calculator -->
-  <div class="calculator">
-    <h2>SIP Calculator</h2>
-    <input type="number" id="sipMonthly" placeholder="Monthly Investment">
-    <input type="number" id="sipRate" placeholder="Interest Rate (% per year)">
-    <input type="number" id="sipYears" placeholder="Years">
-    <button onclick="calculateSIP()">Calculate</button>
-    <p id="sipResult" class="result"></p>
-  </div>
-
-  <!-- FD Calculator -->
-  <div class="calculator">
-    <h2>FD Calculator</h2>
-    <input type="number" id="fdPrincipal" placeholder="Principal Amount">
-    <input type="number" id="fdRate" placeholder="Interest Rate (% per year)">
-    <input type="number" id="fdYears" placeholder="Years">
-    <button onclick="calculateFD()">Calculate</button>
-    <p id="fdResult" class="result"></p>
-  </div>
-
-  <!-- EMI Calculator -->
-  <div class="calculator">
-    <h2>EMI Calculator</h2>
-    <input type="number" id="emiLoan" placeholder="Loan Amount">
-    <input type="number" id="emiRate" placeholder="Annual Interest Rate (%)">
-    <input type="number" id="emiYears" placeholder="Loan Term (Years)">
-    <button onclick="calculateEMI()">Calculate</button>
-    <p id="emiResult" class="result"></p>
-  </div>
-
-  <!-- Contact Footer -->
+  <!-- Footer Contact -->
   <div class="footer">
-    Ratnakar Verma - Financial Consultant <br/>
-    Mobile: +91 94159 10968, +91 79055 30441 <br/>
-    Email: ratnakarverma1969@gmail.com <br/>
-    H. No. 17, Avadh Vihar Colony, <br/>
-    Near Malhor Railway Crossing, Nizampur Malhor, <br/>
+    Ratnakar Verma - Financial Consultant<br/>
+    Mobile: +91 94159 10968, +91 79055 30441<br/>
+    Email: ratnakarverma1969@gmail.com<br/>
+    H. No. 17, Avadh Vihar Colony,<br/>
+    Near Malhor Railway Crossing, Nizampur Malhor,<br/>
     Gomtinagar, Lucknow - 226010, Uttar Pradesh
   </div>
 
-  <!-- Calculator JS -->
+  <!-- Calculator Scripts -->
   <script>
     function calculateSIP() {
-      const monthly = parseFloat(document.getElementById("sipMonthly").value);
-      const rate = parseFloat(document.getElementById("sipRate").value) / 100 / 12;
-      const years = parseFloat(document.getElementById("sipYears").value);
-      const months = years * 12;
-
-      const maturity = monthly * ((Math.pow(1 + rate, months) - 1) / rate) * (1 + rate);
-      document.getElementById("sipResult").innerHTML = `Maturity Amount: ₹${maturity.toFixed(2)}`;
+      const p = parseFloat(document.getElementById('sip-amount').value);
+      const r = parseFloat(document.getElementById('sip-rate').value) / 12 / 100;
+      const n = parseFloat(document.getElementById('sip-years').value) * 12;
+      const maturity = p * ((Math.pow(1 + r, n) - 1) * (1 + r) / r);
+      document.getElementById('sip-result').textContent = "Maturity Amount: ₹ " + maturity.toFixed(2);
     }
 
     function calculateFD() {
-      const principal = parseFloat(document.getElementById("fdPrincipal").value);
-      const rate = parseFloat(document.getElementById("fdRate").value) / 100;
-      const years = parseFloat(document.getElementById("fdYears").value);
-
-      const maturity = principal * Math.pow((1 + rate), years);
-      document.getElementById("fdResult").innerHTML = `Maturity Amount: ₹${maturity.toFixed(2)}`;
+      const p = parseFloat(document.getElementById('fd-principal').value);
+      const r = parseFloat(document.getElementById('fd-rate').value) / 100;
+      const n = parseFloat(document.getElementById('fd-years').value);
+      const maturity = p * Math.pow(1 + r, n);
+      document.getElementById('fd-result').textContent = "Maturity Amount: ₹ " + maturity.toFixed(2);
     }
 
     function calculateEMI() {
-      const loan = parseFloat(document.getElementById("emiLoan").value);
-      const rate = parseFloat(document.getElementById("emiRate").value) / 100 / 12;
-      const years = parseFloat(document.getElementById("emiYears").value);
-      const months = years * 12;
-
-      const emi = loan * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
-      document.getElementById("emiResult").innerHTML = `Monthly EMI: ₹${emi.toFixed(2)}`;
+      const loan = parseFloat(document.getElementById('emi-loan').value);
+      const annualRate = parseFloat(document.getElementById('emi-rate').value) / 12 / 100;
+      const months = parseFloat(document.getElementById('emi-years').value) * 12;
+      const emi = loan * annualRate * Math.pow(1 + annualRate, months) / (Math.pow(1 + annualRate, months) - 1);
+      document.getElementById('emi-result').textContent = "Monthly EMI: ₹ " + emi.toFixed(2);
     }
   </script>
 
