@@ -1,27 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SIP Calculator</title>
+  <meta charset="UTF-8">
+  <title>Finance Tools</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    input { margin: 5px; padding: 8px; width: 200px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #0070f3;
+    }
+    .tool {
+      background: #fff;
+      padding: 15px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      max-width: 500px;
+    }
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    h3 {
+      color: green;
+    }
   </style>
 </head>
 <body>
-  <h1>SIP Calculator</h1>
-  Monthly Investment: <input id="amount" type="number"><br>
-  Interest Rate (% per year): <input id="rate" type="number"><br>
-  Years: <input id="years" type="number"><br>
-  <button onclick="calculate()">Calculate</button>
-  <h2 id="result"></h2>
+
+  <h1>📊 Finance Tools</h1>
+
+  <!-- SIP Calculator -->
+  <div class="tool">
+    <h2>SIP Calculator</h2>
+    <input id="sipAmount" type="number" placeholder="Monthly Investment">
+    <input id="sipRate" type="number" placeholder="Interest Rate (% per year)">
+    <input id="sipYears" type="number" placeholder="Years">
+    <button onclick="calcSIP()">Calculate</button>
+    <h3 id="sipResult"></h3>
+  </div>
+
+  <!-- FD Calculator -->
+  <div class="tool">
+    <h2>FD Calculator</h2>
+    <input id="fdPrincipal" type="number" placeholder="Principal Amount">
+    <input id="fdRate" type="number" placeholder="Interest Rate (% per year)">
+    <input id="fdYears" type="number" placeholder="Years">
+    <button onclick="calcFD()">Calculate</button>
+    <h3 id="fdResult"></h3>
+  </div>
+
+  <!-- EMI Calculator -->
+  <div class="tool">
+    <h2>EMI Calculator</h2>
+    <input id="loan" type="number" placeholder="Loan Amount">
+    <input id="emiRate" type="number" placeholder="Annual Interest Rate (%)">
+    <input id="term" type="number" placeholder="Loan Term (Years)">
+    <button onclick="calcEMI()">Calculate</button>
+    <h3 id="emiResult"></h3>
+  </div>
 
   <script>
-    function calculate() {
-      let P = parseFloat(document.getElementById("amount").value);
-      let r = parseFloat(document.getElementById("rate").value) / 100 / 12;
-      let n = parseFloat(document.getElementById("years").value) * 12;
-      let FV = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
-      document.getElementById("result").innerText = "Future Value: ₹" + FV.toFixed(2);
+    function calcSIP() {
+      let P = parseFloat(document.getElementById("sipAmount").value);
+      let r = parseFloat(document.getElementById("sipRate").value) / 100 / 12;
+      let n = parseFloat(document.getElementById("sipYears").value) * 12;
+      let fv = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
+      document.getElementById("sipResult").innerText = "Future Value: ₹" + fv.toFixed(2);
+    }
+
+    function calcFD() {
+      let p = parseFloat(document.getElementById("fdPrincipal").value);
+      let r = parseFloat(document.getElementById("fdRate").value) / 100;
+      let t = parseFloat(document.getElementById("fdYears").value);
+      let amount = p * Math.pow((1 + r), t);
+      document.getElementById("fdResult").innerText = "Maturity Value: ₹" + amount.toFixed(2);
+    }
+
+    function calcEMI() {
+      let P = parseFloat(document.getElementById("loan").value);
+      let R = parseFloat(document.getElementById("emiRate").value) / 12 / 100;
+      let N = parseFloat(document.getElementById("term").value) * 12;
+      let emi = P * R * Math.pow(1 + R, N) / (Math.pow(1 + R, N) - 1);
+      document.getElementById("emiResult").innerText = "Monthly EMI: ₹" + emi.toFixed(2);
     }
   </script>
 </body>
