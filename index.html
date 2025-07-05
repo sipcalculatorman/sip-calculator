@@ -75,4 +75,35 @@
     <button onclick="calculateEMI()">Calculate</button>
     <p id="emiResult"></p>
   </div>  <footer>
-    Ratnakar Verma - Financial
+    Ratnakar Verma - Financial Consultant<br>
+    Mobile: +91 94159 10968, +91 79055 30441<br>
+    Email: ratnakarverma1969@gmail.com<br>
+    H. No. 17, Avadh Vihar Colony,<br>
+    Near Malhor Railway Crossing, Nizampur Malhor,<br>
+    Gomtinagar, Lucknow - 226010, Uttar Pradesh
+  </footer>  <script>
+    function calculateSIP() {
+      const P = parseFloat(document.getElementById('sipAmount').value);
+      const r = parseFloat(document.getElementById('sipRate').value) / 12 / 100;
+      const n = parseFloat(document.getElementById('sipYears').value) * 12;
+      const FV = P * (((Math.pow(1 + r, n)) - 1) * (1 + r)) / r;
+      document.getElementById('sipResult').innerText = 'Maturity Amount: ₹' + FV.toFixed(2);
+    }
+
+    function calculateFD() {
+      const P = parseFloat(document.getElementById('fdPrincipal').value);
+      const r = parseFloat(document.getElementById('fdRate').value) / 100;
+      const t = parseFloat(document.getElementById('fdYears').value);
+      const A = P * Math.pow(1 + r, t);
+      document.getElementById('fdResult').innerText = 'Maturity Amount: ₹' + A.toFixed(2);
+    }
+
+    function calculateEMI() {
+      const P = parseFloat(document.getElementById('emiAmount').value);
+      const r = parseFloat(document.getElementById('emiRate').value) / 12 / 100;
+      const n = parseFloat(document.getElementById('emiYears').value) * 12;
+      const EMI = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      document.getElementById('emiResult').innerText = 'Monthly EMI: ₹' + EMI.toFixed(2);
+    }
+  </script></body>
+</html>
