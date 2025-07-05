@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,40 +62,59 @@
     .chart-container {
       display: flex;
       justify-content: center;
-      margin-top: 20px;
+      margin: 20px 0;
+    }
+    .chart {
+      width: 100%;
+      max-width: 800px;
+      height: 500px;
     }
   </style>
 </head>
-<body><div class="header">POOJA FINANCIAL SOLUTIONS</div><div class="chart-container">
-  <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=BSE%3ASENSEX&width=100%25&height=220&locale=en&dateRange=1D&colorTheme=light&isTransparent=false&autosize=true" width="100%" height="220" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
-</div><div class="calculator">
+<body>
+
+<div class="header">POOJA FINANCIAL SOLUTIONS</div>
+
+<div class="chart-container">
+  <iframe class="chart" src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?symbol=BSE%3ASENSEX&width=100%25&height=500&locale=en&dateRange=1D&colorTheme=light&trendLineColor=rgba(41%2C98%2C255%2C1)&underLineColor=rgba(41%2C98%2C255%2C0.3)&isTransparent=false&autosize=true&largeChartUrl=" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+</div>
+
+<div class="calculator">
   <h2>SIP Calculator</h2>
   <input type="number" id="sipAmount" placeholder="Monthly Investment" />
   <input type="number" id="sipRate" placeholder="Interest Rate (% per year)" />
   <input type="number" id="sipYears" placeholder="Years" />
   <button onclick="calculateSIP()">Calculate</button>
   <div id="sipResult" class="result"></div>
-</div><div class="calculator">
+</div>
+
+<div class="calculator">
   <h2>FD Calculator</h2>
   <input type="number" id="fdAmount" placeholder="Principal Amount" />
   <input type="number" id="fdRate" placeholder="Interest Rate (% per year)" />
   <input type="number" id="fdYears" placeholder="Years" />
   <button onclick="calculateFD()">Calculate</button>
   <div id="fdResult" class="result"></div>
-</div><div class="calculator">
+</div>
+
+<div class="calculator">
   <h2>EMI Calculator</h2>
   <input type="number" id="loanAmount" placeholder="Loan Amount" />
   <input type="number" id="loanRate" placeholder="Annual Interest Rate (%)" />
   <input type="number" id="loanTerm" placeholder="Loan Term (Years)" />
   <button onclick="calculateEMI()">Calculate</button>
   <div id="emiResult" class="result"></div>
-</div><div class="footer">
+</div>
+
+<div class="footer">
   Ratnakar Verma - Financial Consultant<br>
   Mobile: +91 94159 10968, +91 79055 30441<br>
   Email: ratnakarverma1969@gmail.com<br>
   H. No. 17, Avadh Vihar Colony, Near Malhor Railway Crossing, Nizampur Malhor,<br>
   Gomtinagar, Lucknow - 226010, Uttar Pradesh
-</div><script>
+</div>
+
+<script>
 function calculateSIP() {
   let p = parseFloat(document.getElementById('sipAmount').value);
   let r = parseFloat(document.getElementById('sipRate').value) / 100 / 12;
@@ -118,5 +138,7 @@ function calculateEMI() {
   let emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
   document.getElementById('emiResult').innerText = 'Monthly EMI: ₹' + emi.toFixed(2);
 }
-</script></body>
+</script>
+
+</body>
 </html>
