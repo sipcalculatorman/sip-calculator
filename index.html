@@ -17,28 +17,19 @@
       font-size: 22px;
       font-weight: bold;
     }
-    .ticker {
-      margin-top: 10px;
-      padding: 10px;
-    }
-    .slider-container {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-    }
-    .slide {
-      scroll-snap-align: start;
-      flex: 0 0 100%;
+    .tradingview-widget-container {
+      margin: 10px auto;
       max-width: 100%;
-      padding: 20px;
-      box-sizing: border-box;
     }
     .card {
       background: white;
       padding: 20px;
+      margin: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
     h2 {
       text-align: center;
@@ -74,58 +65,43 @@
       font-size: 14px;
       background-color: #f1f1f1;
     }
-    .charts {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-    .chart-box {
-      flex: 1 1 45%;
-      min-width: 300px;
-      height: 300px;
-    }
   </style>
 </head>
-<body>  <header>POOJA FINANCIAL SOLUTIONS</header>  <div class="charts">
-    <div class="chart-box">
-      <iframe src="https://widget.finnhub.io/widgets/stocks/chart?symbol=BSE:SENSEX&watermarkColor=%23eeeeee&backgroundColor=%23ffffff" frameborder="0" width="100%" height="300"></iframe>
-    </div>
-    <div class="chart-box">
-      <iframe src="https://widget.finnhub.io/widgets/stocks/chart?symbol=NSE:NIFTY&watermarkColor=%23eeeeee&backgroundColor=%23ffffff" frameborder="0" width="100%" height="300"></iframe>
-    </div>
-  </div>  <div class="slider-container">
-    <div class="slide">
-      <div class="card">
-        <h2>SIP Calculator</h2>
-        <input id="sip-amount" type="number" placeholder="Monthly Investment" />
-        <input id="sip-rate" type="number" placeholder="Interest Rate (% per year)" />
-        <input id="sip-years" type="number" placeholder="Years" />
-        <button onclick="calculateSIP()">Calculate</button>
-        <div id="sip-result" class="result"></div>
-      </div>
-    </div><div class="slide">
-  <div class="card">
+<body>  <header>POOJA FINANCIAL SOLUTIONS</header>  <!-- Live Ticker -->  <div class="tradingview-widget-container">
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        { "proName": "BSE:SENSEX", "title": "Sensex" },
+        { "proName": "NSE:NIFTY", "title": "Nifty 50" }
+      ],
+      "showSymbolLogo": true,
+      "colorTheme": "light",
+      "isTransparent": false,
+      "displayMode": "adaptive",
+      "locale": "en"
+    }
+    </script>
+  </div>  <!-- SIP Calculator -->  <div class="card">
+    <h2>SIP Calculator</h2>
+    <input id="sip-amount" type="number" placeholder="Monthly Investment" />
+    <input id="sip-rate" type="number" placeholder="Interest Rate (% per year)" />
+    <input id="sip-years" type="number" placeholder="Years" />
+    <button onclick="calculateSIP()">Calculate</button>
+    <div id="sip-result" class="result"></div>
+  </div>  <!-- FD Calculator -->  <div class="card">
     <h2>FD Calculator</h2>
     <input id="fd-principal" type="number" placeholder="Principal Amount" />
     <input id="fd-rate" type="number" placeholder="Interest Rate (% per year)" />
     <input id="fd-years" type="number" placeholder="Years" />
     <button onclick="calculateFD()">Calculate</button>
     <div id="fd-result" class="result"></div>
-  </div>
-</div>
-
-<div class="slide">
-  <div class="card">
+  </div>  <!-- EMI Calculator -->  <div class="card">
     <h2>EMI Calculator</h2>
     <input id="emi-loan" type="number" placeholder="Loan Amount" />
     <input id="emi-rate" type="number" placeholder="Annual Interest Rate (%)" />
     <input id="emi-years" type="number" placeholder="Loan Term (Years)" />
     <button onclick="calculateEMI()">Calculate</button>
     <div id="emi-result" class="result"></div>
-  </div>
-</div>
-
   </div>  <div class="footer">
     Ratnakar Verma - Financial Consultant<br/>
     Mobile: +91 94159 10968, +91 79055 30441<br/>
